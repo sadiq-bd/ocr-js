@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <!-- v4 -->
+    <script src='https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min.js'></script>
+</head>
+<body>
+    <center>
+
+        <h4>OCR Bangla</h4>
+        <input type="url" placeholder="Image URL for OCR" style="padding: 5px;width: 300px;">
+        <button id="ocrBtn" style="padding: 5px;">OCR scan</button><br><br>
+        <textarea id="textContainer" style="width: 100%; min-height: 300px;">
+
+        </textarea>
+        <br>
+        <iframe src="https://img.doerig.dev/" frameborder="1" style="width: 100%;min-height: 400px;">
+            
+        </iframe>
+    </center>
+    <script>
+        document.getElementById('ocrBtn').addEventListener('click', e => {
+            Tesseract.recognize(
+                document.querySelector('input[type=url]').value,
+                'ben',
+                { logger: m => console.log(m) }
+                ).then(({ data: { text } }) => {
+                // console.log(text);
+                document.getElementById('textContainer').innerText = text;
+            })  
+        });
+        
+    </script>
+</body>
+</html>
